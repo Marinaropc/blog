@@ -16,8 +16,12 @@
             <form action="{{ url_for('delete', post_id=post['id']) }}" method="POST">
             <input type="submit" value="Delete">
             </form>
-            <form action="{{ url_for('update', post_id=post['id']) }}" method="POST">
-            <input type="submit" value="Update">
+
+            <form action="{{ url_for('update', post_id=post['id']) }}" method="GET">
+                <input type="submit" value="Update">
+            </form>
+            <form action="{{ url_for('like', post_id=post['id']) }}" method="POST">
+                <input type="submit" value="Like ({{ post.likes }})">
             </form>
         </div>
     {% endfor %}

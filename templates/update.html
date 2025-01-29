@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Post</title>
+</head>
+<body>
+    <h1>Update Post</h1>
+    <form action="{{ url_for('update', post_id=post_to_update['id']) }}" method="POST">
+        <label>Title:</label>
+        <input type="text" name="title" value="{{ post_to_update['title'] }}" required>
+
+        <label>Author:</label>
+        <input type="text" name="author" value="{{ post_to_update['author'] }}" required>
+
+        <label>Content:</label>
+        <textarea name="content" required>{{ post_to_update['content'] }}</textarea>
+
+        <input type="submit" value="Save Changes">
+    </form>
+    <a href="{{ url_for('index') }}">Cancel</a>
+</body>
+</html>

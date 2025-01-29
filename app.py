@@ -50,8 +50,28 @@ def delete(post_id):
 
 
 @app.route('/update/<int:post_id>', methods=['GET', 'POST'])
-def update():
-    pass
+def update(post_id):
+    blog_posts = load_blog_posts()
+    post_to_update = next((post for post in blog_posts if post['id'] == post_id), None)
+    if post_to_update is None:
+        return "Post not found", 404
+    if request.method == 'POST':
+        post_to_update['content'] = request.form.get('content')
+        post_to_update['title'] = request.form.get('title')
+        post_to_update['author'] = request.form.get('author')
+        save_blog_posts(blog_posts)
+        return redirect(url_for('index'))
+    return render_template('update.html', post_to_update=post_to_update)
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def like(post_id):
+    blog_posts = load_blog_posts()
+    for post in blog_posts:
+        if post['id'] == post_id:
+            post['likes'] += 1
+            save_blog_posts(blog_posts)
+            break
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
