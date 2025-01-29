@@ -4,6 +4,7 @@ import json
 app = Flask(__name__)
 
 def load_blog_posts():
+    """Load blog posts from storage.json file."""
     try:
         with open('storage.json', 'r') as f:
             return json.load(f)
@@ -12,18 +13,21 @@ def load_blog_posts():
 
 
 def save_blog_posts(posts):
+    """Save blog posts to storage.json file."""
     with open('storage.json', 'w') as f:
         json.dump(posts, f, indent=4)
 
 
 @app.route('/')
 def index():
+    """Render index page."""
     blog_posts = load_blog_posts()
     return render_template('index.html', blog_posts=blog_posts)
 
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
+    """Render add page."""
     if request.method == 'POST':
         post_content = request.form.get('content')
         post_title = request.form.get('title')
@@ -43,6 +47,7 @@ def add():
 
 @app.route('/delete/<int:post_id>', methods=['POST'])
 def delete(post_id):
+    """Delete blog post."""
     blog_posts = load_blog_posts()
     update_posts= [post for post in blog_posts if post['id'] != post_id]
     save_blog_posts(update_posts)
@@ -51,6 +56,7 @@ def delete(post_id):
 
 @app.route('/update/<int:post_id>', methods=['GET', 'POST'])
 def update(post_id):
+    """Update blog post."""
     blog_posts = load_blog_posts()
     post_to_update = next((post for post in blog_posts if post['id'] == post_id), None)
     if post_to_update is None:
@@ -65,6 +71,7 @@ def update(post_id):
 
 @app.route('/like/<int:post_id>', methods=['POST'])
 def like(post_id):
+    """Like blog post."""
     blog_posts = load_blog_posts()
     for post in blog_posts:
         if post['id'] == post_id:
