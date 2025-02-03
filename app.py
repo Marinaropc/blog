@@ -34,8 +34,12 @@ def add():
         post_author = request.form.get('author')
 
         blog_posts = load_blog_posts()
+        if blog_posts:
+            highest_id = max(post['id'] for post in blog_posts)
+        else:
+            highest_id = 0
         blog_posts.append({
-            'id': len(blog_posts) + 1,
+            'id': highest_id + 1,
             'content': post_content,
             'title': post_title,
             'author': post_author
@@ -81,4 +85,4 @@ def like(post_id):
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5007, debug=True)

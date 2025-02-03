@@ -12,12 +12,5 @@
         "title": "Second Post",
         "content": "This is another post.",
         "likes": 0
-    },
-    {
-        "id": 3,
-        "author": "Marina",
-        "title": "Second Post",
-        "content": "i like foxes",
-        "likes": 4
     }
 ]
