@@ -4,13 +4,20 @@
         "author": "John Doe",
         "title": "First Post",
         "content": "This is my first post.tuki",
-        "likes": 135
+        "likes": 136
     },
     {
         "id": 2,
         "author": "Jane Doe",
         "title": "Second Post",
         "content": "This is another post.",
-        "likes": 0
+        "likes": 1
+    },
+    {
+        "id": 3,
+        "content": "had an interesting odessey",
+        "title": "jesus and his odessey",
+        "author": "Marina Romero",
+        "likes": 3
     }
 ]

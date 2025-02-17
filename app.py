@@ -42,7 +42,8 @@ def add():
             'id': highest_id + 1,
             'content': post_content,
             'title': post_title,
-            'author': post_author
+            'author': post_author,
+            'likes': 0
         })
         save_blog_posts(blog_posts)
         return redirect(url_for('index'))
@@ -79,10 +80,11 @@ def like(post_id):
     blog_posts = load_blog_posts()
     for post in blog_posts:
         if post['id'] == post_id:
+            post.setdefault('likes', 0)
             post['likes'] += 1
             save_blog_posts(blog_posts)
             break
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5009, debug=True)
